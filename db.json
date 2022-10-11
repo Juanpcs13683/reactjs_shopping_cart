@@ -1,19 +1,26 @@
 {
-  "posts": [
+  "products": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "nameProduct": "mouse",
+      "priceProduct": "20",
+      "id": 1
+    },
+    {
+      "nameProduct": "keyboard",
+      "priceProduct": "45",
+      "id": 2
+    },
+    {
+      "nameProduct": "stuff",
+      "priceProduct": "123",
+      "id": 3
     }
   ],
-  "comments": [
+  "shoppingCart": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "nameProduct": "speakers",
+      "priceProduct": "40",
+      "id": 1
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
