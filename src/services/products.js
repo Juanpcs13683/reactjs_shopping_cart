@@ -22,7 +22,7 @@ const createProduct = (newProduct) => {
 }
 
 const createShopping = (newProduct) => {
-    const request = axios.post(baseUrlShopping)
+    const request = axios.post(baseUrlShopping, newProduct)
     return request.then(response => response.data)
 }
 
@@ -38,4 +38,9 @@ const delProduct = (id) => {
     return request.then(response => response.data)
 }
 
-export default {getAllProducts, getAllShopping, createProduct, createShopping, updateProduct, delProduct}
+const delShopping = (id) => {
+    const request = axios.delete(`${baseUrlShopping}/${id}`)
+    return request.then(response => response.data)
+}
+
+export default {getAllProducts, getAllShopping, createProduct, createShopping, updateProduct, delProduct, delShopping}

@@ -9,7 +9,7 @@ const BoxShopping = ({title, shoppingList, nameShoppingButton, classShoppingButt
             <div key={product.id}>
                 <p><b>{product.nameProduct}</b></p>
                 <p>$ {product.priceProduct}</p>
-                <Button nameButton={nameShoppingButton} classButton={classShoppingButton} handleEvent={handleShoppingButton} />
+                <Button id={product.id} nameButton={nameShoppingButton} classButton={classShoppingButton} handleEvent={handleShoppingButton} />
             </div>
         ))}
     </div>

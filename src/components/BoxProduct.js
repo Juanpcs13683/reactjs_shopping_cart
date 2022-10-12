@@ -8,9 +8,9 @@ const BoxProduct = (props) => (
             <div key={product.id}>
                 <p><b>{product.nameProduct}</b></p>
                 <p>$ {product.priceProduct}</p>
-                <Button nameButton={props.nameAddShoppingButton} classButton={props.classAddShoppingButton} handleEvent={props.handleAddShoppingProduct} />
-                <Button nameButton={props.nameUpdateButton} classButton={props.classUpdateButton} handleEvent={props.handleUpdateProduct}/>
-                <Button nameButton={props.nameDeleteButton} classButton={props.classDeleteButton} handleEvent={props.handleDeleteProduct}/>
+                <Button id={product.id} nameButton={props.nameAddShoppingButton} classButton={props.classAddShoppingButton} handleEvent={props.handleAddShoppingProduct} />
+                <Button id={product.id} nameButton={props.nameUpdateButton} classButton={props.classUpdateButton} handleEvent={props.handleUpdateProduct}/>
+                <Button id={product.id} nameButton={props.nameDeleteButton} classButton={props.classDeleteButton} handleEvent={props.handleDeleteProduct}/>
             </div>
         ))}
     </div>
