@@ -1,4 +1,129 @@
 body {
+ 
+    background-color: darkslateblue;
+}
+.App{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.author{
+    display: flex;
+    background-color: darkcyan;
+    align-items: center;
+    justify-content: center;    
+    border-radius: 20px;
+    width: 120px;
+    color: lightgreen;
+    margin: 20px auto;
+}
+
+.productForm>div>input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: darkturquoise;
+    color: black;
+    border-radius: 50px;
+    border-style: hidden;
+    margin: 5px auto;
+}
+
+.productForm>div>button{
+    display: flex;
+    border-style: hidden;
+    border-radius: 20px;
+    background-color: lawngreen;
+    margin: auto;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.box_div{
+    display:flex;
+    flex-direction: row;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 20px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    padding: 10px;
+}
+
+.product-container{
+    margin: 5px;
+    background-color: darkcyan;
+    border-radius: 20px;
+    color: lightyellow;
+    padding: 10px;
 
 }
 
+.shopping-container{
+margin: 5px;
+    background-color: darkgray;
+    border-radius: 20px;
+    color: lightyellow;
+    padding: 10px 30px;
+    color: darkslategrey;
+}
+
+.addShoppingButton{
+    background-color: greenyellow;
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.updateButton{
+    background-color: darkturquoise;
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.deleteButton,.shoppingButton{
+    background-color: darkorange;
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.product{
+    font-size: x-large;
+}
+
+.price{
+    font-size: 1.1em;
+}
+
+.errorMessage{
+    color: red;
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.successMessage{
+    color: green;
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

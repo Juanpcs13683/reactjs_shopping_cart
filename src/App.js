@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Logo from "./components/Author";
 import BoxProduct from "./components/BoxProduct";
@@ -44,13 +43,53 @@ const addProduct = event => {
     priceProduct: priceProduct
   }
 
- productServices.createProduct(productObj)
+  const product = products.find(product => product.nameProduct === productObj.nameProduct)
+  console.log(product)
+  const id = product ? product.id : false
+  console.log('id',id)
+
+
+  products.find(product=> product.nameProduct === productObj.nameProduct) || shoppingCart.find(product=> product.nameProduct === productObj.nameProduct)?
+  window.confirm('this item already exists, do you want to update it?')?
+  id? productServices.updateProduct(id, productObj)
+  .then(returnedObj=> {
+    setProducts(products.map(p => p.id !== id ? p : returnedObj))
+    setNameProduct('')
+    setPriceProduct('')
+    setMessage('Product updated successfuly')
+    setClassNotification('successMessage')
+    setTimeout(() => {
+      setMessage('')
+      setClassNotification('')
+    }, 5000);
+}).catch(error=>{
+  setMessage('Error trying to update the product')
+  setClassNotification('errorMessage')
+  setTimeout(() => {
+    setMessage('')
+    setClassNotification('')
+  }, 5000);
+})
+  :window.alert('id not found, product in Shopping Cart')
+  :console.log('negacion de el confirm')
+  :productServices.createProduct(productObj)
   .then(response => {
-    console.log('post fulfilled')
     setProducts(products.concat(response))
     setNameProduct('')
     setPriceProduct('')
-    
+    setMessage('Product added successfuly')
+    setClassNotification('successMessage')
+    setTimeout(() => {
+      setMessage('')
+      setClassNotification('')
+    }, 5000);
+  }).catch(error=>{
+    setMessage('Error trying to add the product', error)
+    setClassNotification('errorMessage')
+    setTimeout(() => {
+      setMessage('')
+      setClassNotification('')
+    }, 5000);
   })
 
 }
@@ -68,50 +107,81 @@ const handlePrice = (event) => {
 }
 
 
-//handle functions // falta hacer el mensage de exito o error
+//handle functions // done
 const handleAddShoppingProduct = (event) => {
-const id = event.target.id
-productServices.delProduct(id).then(response => {
-  console.log('delete done')
-  //setProducts(products.map(product => product.id !== id))
-  //message
-})
-
-console.log(products.find(product => product.id == id))
-productServices.createShopping(products.find(product => product.id == id))
+const id = parseInt(event.target.id)
+const product = products.find(prod => prod.id === id)
+console.log(products.find(product => product.id === id))
+productServices.createShopping({...product, id:null})
 .then(response => {
   console.log('item added to shopping')
-  console.log('response added',response)
+  productServices.delProduct(id).then(response => {
+    //console.log('delete done')
+    //setProducts(products.map(product => product.id !== id))
+    //message
+  })
+ 
+  //console.log('response added',response)
   productServices.getAllProducts().then(response=>setProducts(response))
-  console.log('product added to shopping')
+  //console.log('product added to shopping')
   productServices.getAllShopping().then(response => setShoppingCart(response))
-  console.log('pruduct added to shopping')
+  //console.log('pruduct added to shopping')
+
+  //Setting the notification
+  setMessage('Item added successfuly')
+  setClassNotification('successMessage')
+  setTimeout(() => {
+    setMessage('')
+    setClassNotification('')
+  }, 5000);
   
+}).catch(error=>{
+  setMessage('Error adding product to shopping cart', error)
+  setClassNotification('errorMessage')
+  setTimeout(() => {
+    setMessage('')
+    setClassNotification('')
+  }, 5000);
 })
 
 }
 
+// set name and price in the form to let them be modified
 const handleUpdateProduct = (event) => {
-  console.log('button update pressed')
-  const product = products.find(product => product.id == event.target.id)
-  console.log(product)
+  const product = products.find(product => product.id === parseInt( event.target.id))
  setNameProduct(product.nameProduct)
   setPriceProduct(product.priceProduct)
 
 }
 
-// delte product from products list // falta mensaje
+// delte product from products list // done
 const handleDeleteProduct = (event) => {
-  console.log('button delete pressed')
+  if(window.confirm('Are you sure to remove this product?')){
   productServices.delProduct(event.target.id)
-  .then(response=> productServices.getAllProducts().then(response=> setProducts(response)))
-}
+  .then(response=>{ 
+    productServices.getAllProducts()
+    .then(allProducts=> setProducts(allProducts))
+    setMessage('Item removed successfuly')
+    setClassNotification('successMessage')
+    setTimeout(() => {
+      setMessage('')
+      setClassNotification('')
+    }, 5000);
+  }).catch(error=>{
+    setMessage('Error removing this item', error)
+    setClassNotification('errorMessage')
+    setTimeout(() => {
+      setMessage('')
+      setClassNotification('')
+    }, 5000);
+  })
+}}
 
-//remove item from shopping list //falta message of fail or error
+//remove item from shopping list //done
 const handleRemoveShopping = (event) => {
-  const id = event.target.id
-  const product = shoppingCart.find(product => product.id == id)
-  const changedProduct = {...product, id: ''}
+  const id = parseInt(event.target.id)
+  const product = shoppingCart.find(product => product.id === id)
+  const changedProduct = {...product, id:null}
   if(window.confirm('Do you want to remove this item?')){
 productServices.createProduct(changedProduct)
 .then(response => {
@@ -123,23 +193,31 @@ productServices.createProduct(changedProduct)
   productServices.getAllShopping().then(response=>setShoppingCart(response))
   console.log('shopping successful')
   setMessage('Item removed successfully')
-  setClassNotification('succesMessage')
+  setClassNotification('successMessage')
   setTimeout(() => {
     setMessage('')
     setClassNotification('')
   }, 5000);
-})}
+}).catch(error=>{
+  setMessage('Error removing item from shopping cart')
+  setClassNotification('errorMessage')
+  setTimeout(() => {
+    setMessage('')
+    setClassNotification('')
+  }, 5000);
+})
+}
 }
   return (
     <div className="App">
       <Logo />
       <ProductForm buttonText={"Add Products"} handleSubmit={addProduct} handleName={handleName} handlePrice={handlePrice} nameProduct={nameProduct} priceProduct={priceProduct} />
       <Notification message={message} classMessage={classNotification} />
-      <div className="box div">
+      <div className="box_div">
         <BoxProduct title="Products" productList={products} nameAddShoppingButton="Add item" classAddShoppingButton="addShoppingButton" handleAddShoppingProduct={handleAddShoppingProduct}
         nameUpdateButton="Update" classUpdateButton="updateButton" handleUpdateProduct={handleUpdateProduct}
         nameDeleteButton="Delete" classDeleteButton="deleteButton" handleDeleteProduct={handleDeleteProduct}/>
-        <BoxShopping title='Shopping' shoppingList={shoppingCart} nameShoppingButton="remove item" classAddShoppingButton="shoppingButton" handleShoppingButton={handleRemoveShopping}/>
+        <BoxShopping title='Shopping Cart' shoppingList={shoppingCart} nameShoppingButton="remove item" classShoppingButton="shoppingButton" handleShoppingButton={handleRemoveShopping}/>
       </div>
     </div>
   );

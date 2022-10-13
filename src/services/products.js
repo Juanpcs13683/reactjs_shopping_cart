@@ -28,7 +28,7 @@ const createShopping = (newProduct) => {
 
 //method to update a product
 const updateProduct = (id, newProduct) => {
-    const request = axios.put(baseUrl, newProduct)
+    const request = axios.put(`${baseUrl}/${id}`, newProduct)
     return request.then(response => response.data)
 }
 

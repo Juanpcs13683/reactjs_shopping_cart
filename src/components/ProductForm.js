@@ -1,12 +1,12 @@
 import React from "react";
 
 const ProductForm = ({ buttonText, handleSubmit, nameProduct, priceProduct, handleName, handlePrice }) => (
-   <form onSubmit={handleSubmit}>
+   <form className="productForm" onSubmit={handleSubmit}>
     <div>
-        Name of product: <input value={nameProduct} onChange={handleName} required/>
+        <input  value={nameProduct} onChange={handleName} placeholder="Product's name" required/>
     </div>
     <div>
-        Price of product: <input value={priceProduct} onChange={handlePrice} required/> 
+        <input value={priceProduct} onChange={handlePrice} placeholder="Product's price" required/> 
     </div>
     <div>
         <button type="submit">{buttonText}</button>

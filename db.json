@@ -1,31 +1,36 @@
 {
   "products": [
     {
-      "nameProduct": "mouse",
-      "priceProduct": "20",
-      "id": 1
+      "nameProduct": "speakers",
+      "priceProduct": "40",
+      "id": 14
     },
     {
       "nameProduct": "keyboard",
-      "priceProduct": "45",
-      "id": 2
+      "priceProduct": "44",
+      "id": 16
     },
     {
-      "nameProduct": "stuff",
+      "nameProduct": "juan",
       "priceProduct": "123",
-      "id": 3
-    },
-    {
-      "nameProduct": "screen",
-      "priceProduct": "54",
-      "id": 4
+      "id": 17
     }
   ],
   "shoppingCart": [
     {
-      "nameProduct": "speakers",
-      "priceProduct": "40",
-      "id": 4
+      "nameProduct": "stuff",
+      "priceProduct": "123",
+      "id": 10
+    },
+    {
+      "nameProduct": "teclado",
+      "priceProduct": "12",
+      "id": 13
+    },
+    {
+      "nameProduct": "mouse",
+      "priceProduct": "20",
+      "id": 14
     }
   ]
 }
